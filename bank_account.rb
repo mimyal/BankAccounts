@@ -20,7 +20,7 @@ module Bank
         account = self.new(line[0],line[1].to_f,line[2]) #these are the arguments fed into the class instance -don't confuse with an array
         accounts[account.id] = account
       end #each
-      return accounts # returns a hash of the Account instances in csv-file
+      return accounts # returns a hash of the Account instances in csv-file, using the csv-id as key
     end
 
     # Method returns an instance of Account where the value of the id field in the CSV matches the passed parameter
