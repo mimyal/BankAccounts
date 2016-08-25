@@ -1,6 +1,6 @@
 require_relative 'bank_account'
 
-module BankingServices
+module Bank
   # Tests are written to ensure the functionality returns what is expected.
   # 3) Error handling
   #   A new account cannot be created with initial negative balance - this will raise an ArgumentError (Google this)
@@ -10,7 +10,7 @@ module BankingServices
 
     #Test to ensure the balance display correctly
     def test_initial_balance
-      test_bank_account = BankingServices::BankAccount.new
+      test_bank_account = Bank::Account.new
       if test_bank_account.account_data[:balance] == 0
         return "Test success: Initial balance Integrity confirmed."
       else
@@ -29,7 +29,7 @@ module BankingServices
 
     #Test that the initial balance is negative only with an ArgumentError
     def test_initial_balance_not_negative
-      test_bank_account = BankingServices::BankAccount.new
+      test_bank_account = Bank::Account.new
       if test_bank_account.account_data[:balance] >= 0
         return "Test success: Account balance is initially at or over zero."
       else
@@ -38,8 +38,8 @@ module BankingServices
     end
   end #tests
 
-  my_tests = BankingServices::BankSvsTests.new
+  my_tests = Bank::BankSvsTests.new
   puts my_tests.test_initial_balance
   puts my_tests.test_initial_balance_not_negative
 
-end #BankingServices
+end #Bank
