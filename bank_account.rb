@@ -8,7 +8,7 @@ module Bank
       @balance = (balance / 100).round(2) # in dollars
       @start_date = date
 
-      if balance < 0
+      if @balance < 0
         raise ArgumentError, "Accounts cannot initialize with a negative balance"
       end
     end #init
@@ -30,7 +30,7 @@ module Bank
     end
 
     def display_balance
-      puts "Your starting balance is: #{ @balance } independent coins."
+      puts "Your balance is: #{ @balance } independent coins."
       return @balance
     end #balance
 
@@ -40,13 +40,14 @@ module Bank
       return @balance
     end #deposit
 
+    # @TODO rewrite this to super it to the subclasses with new variables fee and minimum_balance
     def withdraw(withdrawal_amount)
       new_balance = @balance - withdrawal_amount
       if new_balance > 0
         @balance = new_balance.round(2)
         puts "Your current balance after your withdrawal: #{ @balance } independent coins."
       else
-        puts "This is more money than this account holds."
+        puts "This is more money than you are allowed to withdraw."
       end
       return @balance
     end#withdraw

@@ -166,7 +166,7 @@ Create a `MoneyMarketAccount` class which should inherit behavior from the `Acco
     **Account ID** - (Fixnum) a unique identifier corresponding to an account
     **Owner ID** - (Fixnum) a unique identifier corresponding to an owner
 
-<!--
+
 ## Wave 3
 ### Learning Goals
 - Use inheritance to share some behavior across classes
@@ -209,4 +209,3 @@ Create a `MoneyMarketAccount` class which should inherit behavior from the `Acco
 - `#add_interest(rate)`: Calculate the interest on the balance and add the interest to the balance. Return the interest that was calculated and added to the balance (not the updated balance).
     - Note** This is the same as the `SavingsAccount` interest.
 - `#reset_transactions`: Resets the number of transactions to zero
--->
