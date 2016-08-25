@@ -1,19 +1,11 @@
-# Wave 2 Requirements
-#
-# Update the Account class to be able to handle all of these fields from the CSV file used as input.
-# For example, manually choose the data from the first line of the CSV file and ensure you can create a new instance of your Account using that data
-# Add the following class methods to your existing Account class
-# self.all - returns a collection of Account instances, representing all of the Accounts described in the CSV. See below for the CSV file specifications
-# self.find(id) - returns an instance of Account where the value of the id field in the CSV matches the passed parameter
-
 require 'csv'
 module Bank
   class Account # class for each account
-    attr_accessor :account_id, :balance, :start_date # different gets and sets
+    attr_accessor :id, :balance, :start_date # different gets and sets
 
     def initialize(id, balance, date)
-      @account_id = id
-      @balance = balance
+      @id = id
+      @balance = (balance / 100).round(2) # in dollars
       @start_date = date
 
       if balance < 0
@@ -23,49 +15,42 @@ module Bank
 
     # Method returns a collection of Account instances, representing all of the Accounts described in the CSV.
     def self.all
-      accounts = []
-      # Here is my hash of three arrays. But I should have made a hash of accounts... Maybe...
+      accounts = {}
       CSV.read('support/accounts.csv').each do |line|
-        account = self.new(line[0],line[1].to_f,line[2])
-        accounts << account
+        account = self.new(line[0],line[1].to_f,line[2]) #these are the arguments fed into the class instance -don't confuse with an array
+        accounts[account.id] = account
       end #each
-      return accounts
+      return accounts # returns a hash of the Account instances in csv-file
     end
 
     # Method returns an instance of Account where the value of the id field in the CSV matches the passed parameter
     def self.find(id)
-      accounts = all # array of arrays where the array elements in the large array are each account
-
-        accounts.each do |account|
-          if account.account_id == id
-            return account
-          end
-        end #each
-
-
+      accounts = self.all
+      return accounts[id]
     end
 
+    def display_balance
+      puts "Your starting balance is: #{ @balance } independent coins."
+      return @balance
+    end #balance
+
+    def deposit(deposit_amount)
+      @balance += deposit_amount
+      puts "Your current balance after your deposit is: #{ @balance } independent coins."
+      return @balance
+    end #deposit
+
     def withdraw(withdrawal_amount)
-      new_balance = @account_data[:balance] - withdrawal_amount
+      new_balance = @balance - withdrawal_amount
       if new_balance > 0
-        @account_data[:balance] = new_balance
-        puts "Your current balance after your withdrawal: #{ @account_data[:balance] } independent coins."
+        @balance = new_balance.round(2)
+        puts "Your current balance after your withdrawal: #{ @balance } independent coins."
       else
         puts "This is more money than this account holds."
       end
-      return @account_data[:balance]
+      return @balance
     end#withdraw
 
-    def deposit(deposit_amount)
-      @account_data[:balance] = @account_data[:balance] + deposit_amount
-      puts "Your current balance after your deposit is: #{ @account_data[:balance] } independent coins."
-      return @account_data[:balance]
-    end #deposit
-
-    def balance
-      puts "Your starting balance is: #{ @account_data[:balance] } independent coins."
-      return @account_data[:balance]
-    end #balance
   end #Account
 
 
