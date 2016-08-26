@@ -61,3 +61,29 @@ puts "Writing a check for another 'tenner'! But there is no fee. Yay."
 end rescue puts "ERROR! Writing the method right now." # this works!
 my_check_acct.withdraw_using_check(10)
 my_check_acct.display_balance
+puts "MONEY MARKET OPEN"
+mm_account = Bank::MoneyMarketAccount.new("12345abc", 2000000, "1-jan-2016")
+puts "We have an account with 10k."
+mm_account.withdraw(21000)
+puts "Tsk tsk, you're supposed to keep money here, not take more than you should have."
+puts "Let's try again. Maybe seven transactions to push it?"
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.reset_transactions
+puts "Reset, try again."
+mm_account.withdraw(100)
+mm_account.display_balance
+mm_account.withdraw(19000)
+mm_account.display_balance
