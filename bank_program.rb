@@ -54,7 +54,10 @@ my_check_acct.withdraw_using_check(10)
 my_check_acct.display_balance
 my_check_acct.withdraw_using_check(10)
 puts "Here is your fee!"
-my_check_acct.reset_checks rescue puts "ERROR! Writing the method right now."
 my_check_acct.display_balance
+begin
+my_check_acct.reset_checks
+puts "Writing a check for another 'tenner'! But there is no fee. Yay."
+end rescue puts "ERROR! Writing the method right now." # this works!
 my_check_acct.withdraw_using_check(10)
 my_check_acct.display_balance

@@ -6,7 +6,7 @@ module Bank
 
     def initialize(id, balance, date)
       @id = id
-      @balance = (balance / 100).round(2) # in dollars
+      @balance = (balance / 100) # in dollars
       @start_date = date
 
       if @balance < 0
@@ -31,20 +31,20 @@ module Bank
     end
 
     def display_balance
-      puts "Your balance is: #{ @balance } independent coins." # for testing
+      puts "Your balance is: #{ sprintf("%0.02f", @balance) } independent coins." # for testing
       return @balance
     end #balance
 
     def deposit(deposit_amount)
       @balance += deposit_amount
-      puts "Your current balance after your deposit is: #{ @balance } independent coins." # for testing
+      puts "Your current balance after your deposit is: #{ sprintf("%0.02f", @balance) } independent coins." # for testing
       return @balance
     end #deposit
 
     def withdraw(withdrawal_amount)
       new_balance = @balance - withdrawal_amount
       if new_balance > self.class::MINIMUM_BALANCE
-        @balance = new_balance.round(2)
+        @balance = new_balance
       else
         puts "This is more money than you are allowed to withdraw."
       end

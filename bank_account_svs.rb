@@ -14,7 +14,7 @@ module Bank
       fee = 2.00
       transaction = withdrawal_amount + fee
       super(transaction)
-      puts "Your savings account balance is #{ @balance } independent coins." # For testing
+      puts "Your savings account balance is #{ sprintf("%0.02f", @balance) } independent coins." # For testing
       return @balance
     end#withdraw
     def add_interest(rate)
@@ -34,7 +34,7 @@ module Bank
       fee = 1.00
       transaction = withdrawal_amount + fee
       super(transaction)
-      puts "Your checking account balance is #{ @balance } independent coins." # For testing
+      puts "Your checking account balance is #{ sprintf("%0.02f", @balance) } independent coins." # For testing
       return @balance
     end
     def withdraw_using_check(amount)
@@ -53,10 +53,13 @@ module Bank
           puts "This transaction added a fee of two independent coins."
         end
       else
-        print "This is more money than you are allowed to withdraw. "
+        puts "This is more money than you are allowed to withdraw. "
         puts "Your check was returned from the bank."
       end
       return @balance
+    end
+    def reset_checks
+      @checks = 0
     end
   end
 end
