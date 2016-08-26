@@ -1,6 +1,7 @@
 require 'csv'
 module Bank
   class Account # class for each account
+    MINIMUM_BALANCE = 0
     attr_accessor :id, :balance, :start_date # different gets and sets
 
     def initialize(id, balance, date)
@@ -30,22 +31,20 @@ module Bank
     end
 
     def display_balance
-      puts "Your balance is: #{ @balance } independent coins."
+      puts "Your balance is: #{ @balance } independent coins." # for testing
       return @balance
     end #balance
 
     def deposit(deposit_amount)
       @balance += deposit_amount
-      puts "Your current balance after your deposit is: #{ @balance } independent coins."
+      puts "Your current balance after your deposit is: #{ @balance } independent coins." # for testing
       return @balance
     end #deposit
 
-    # @TODO rewrite this to super it to the subclasses with new variables fee and minimum_balance
     def withdraw(withdrawal_amount)
       new_balance = @balance - withdrawal_amount
-      if new_balance > 0
+      if new_balance > self.class::MINIMUM_BALANCE
         @balance = new_balance.round(2)
-        puts "Your current balance after your withdrawal: #{ @balance } independent coins."
       else
         puts "This is more money than you are allowed to withdraw."
       end
